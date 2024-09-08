@@ -15,7 +15,6 @@ struct SearchResultItemView: View {
     var searchResponse: SearchResponse
     var outputFormatHours: String = "HH:mm"
     var outputFormatDays: String = "d MMM, E"
-    var isCheapest: Bool
     var inputDateFormat: String
     @Environment(\.colorScheme) var colorScheme
 
@@ -50,18 +49,6 @@ struct SearchResultItemView: View {
         )) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 10) {
-                    if isCheapest {
-                        HStack {
-                            Text("Самый дешёвый")
-                                .font(.caption)
-                                .fontWeight(.bold)
-                                .padding(6)
-                                .background(Color.buttonSecondaryGreen)
-                                .foregroundColor(Color.textPrimaryWhite)
-                                .clipShape(Capsule())
-                            Spacer()
-                        }
-                    }
                     HStack {
                         Text(formattedPrice)
                             .font(.title)
@@ -123,3 +110,4 @@ struct SearchResultItemView: View {
         }
     }
 }
+

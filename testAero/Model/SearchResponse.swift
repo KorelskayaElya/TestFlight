@@ -37,7 +37,24 @@ struct City: Codable {
     }
 }
 
-struct FlightResult: Codable, Identifiable {
+struct FlightResult: Codable, Identifiable, Hashable {
+    static func == (lhs: FlightResult, rhs: FlightResult) -> Bool {
+        return lhs.id == rhs.id &&
+                       lhs.departureDateTime == rhs.departureDateTime &&
+                       lhs.arrivalDateTime == rhs.arrivalDateTime &&
+                       lhs.price == rhs.price &&
+                       lhs.airline == rhs.airline &&
+                       lhs.availableTicketsCount == rhs.availableTicketsCount
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(departureDateTime)
+        hasher.combine(arrivalDateTime)
+        hasher.combine(airline)
+        hasher.combine(availableTicketsCount)
+    }
+
     // Идентификатор результата перелета
     let id: String?
     // Дата и время отправления
@@ -61,11 +78,21 @@ struct FlightResult: Codable, Identifiable {
     }
 }
 
-struct Price: Codable {
+struct Price: Codable, Equatable {
     // Код валюты
     let currency: String?
     // Значение цены
     let value: Double?
+
+    static func == (lhs: Price, rhs: Price) -> Bool {
+        return lhs.value == rhs.value && lhs.currency == rhs.currency
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(currency)
+        hasher.combine(value)
+    }
+
 
     enum CodingKeys: String, CodingKey {
         case currency

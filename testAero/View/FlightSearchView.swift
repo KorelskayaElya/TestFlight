@@ -104,28 +104,45 @@ struct FlightListView: View {
         ScrollView {
             LazyVStack(spacing: 20) {
                 let sortedFlights = viewModel.sortedFlights
-                let lowestPrice = sortedFlights.first?.price?.value ?? 0
 
-                ForEach(sortedFlights) { flight in
+                ForEach(Array(sortedFlights.enumerated()), id: \.element) { index, flight in
                     if let originCity = viewModel.searchResponse?.origin,
                        let destinationCity = viewModel.searchResponse?.destination,
                        let flightPrice = flight.price, let searchResponse = viewModel.searchResponse {
-                        SearchResultItemView(
-                            flight: flight,
-                            originCity: originCity,
-                            destinationCity: destinationCity,
-                            price: flightPrice,
-                            searchResponse: searchResponse,
-                            isCheapest: flightPrice.value == lowestPrice,
-                            inputDateFormat: viewModel.inputDateFormat
-                        )
-                        .customCardStyle()
+                        ZStack {
+                            SearchResultItemView(
+                                flight: flight,
+                                originCity: originCity,
+                                destinationCity: destinationCity,
+                                price: flightPrice,
+                                searchResponse: searchResponse,
+                                inputDateFormat: viewModel.inputDateFormat
+                            )
+                            .customCardStyle()
+                            if index == 0 {
+                                GeometryReader { geometry in
+                                    VStack {
+                                        Text("Самый дешёвый")
+                                            .font(.caption)
+                                            .fontWeight(.bold)
+                                            .padding(6)
+                                            .background(Color.buttonSecondaryGreen)
+                                            .foregroundColor(Color.textPrimaryWhite)
+                                            .clipShape(Capsule())
+                                            .padding(.leading, 25)
+                                            .offset(y: -90)
+                                    }
+                                }
+                                .frame(height: 20)
+                            }
+                        }
                     }
                 }
             }
         }
     }
 }
+
 
 struct FlightSearchToolbar: View {
     let originName: String

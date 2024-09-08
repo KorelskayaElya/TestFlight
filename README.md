@@ -27,9 +27,11 @@
 
 2. Поддержка тёмной темы (цвета для неё должны быть чуть менее яркими, чем в светлой)
    
-<img src="Images/flightdata.png" alt="Flight" width="250"/> <img src="Images/dark_flightdate.png" alt="FlightDark" width="250"/>
+<img src="Images/flight_light.png" alt="Flight" width="250"/> <img src="Images/flight_dark.png" alt="FlightDark" width="260"/>
 _________
-<img src="Images/filghtdetails.png" alt="FlightDetails" width="240"/> <img src="Images/dark_flightdetails.png" alt="FlightDarkDetails" width="250"/>
+<img src="Images/filghtdetails.png" alt="FlightDetails" width="250"/> <img src="Images/dark_flightdetails.png" alt="FlightDarkDetails" width="260"/>
+_________
+<img src="Images/flight_rotate.png" alt="FlightDetails" width="350"/>
 
 3. Использовать MVVM или UDF архитектуру, можно TCA
 
